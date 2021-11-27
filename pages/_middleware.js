@@ -14,6 +14,11 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
+  // Redirect to page if token exists
+  if (token) {
+    return NextResponse.redirect("/");
+  }
+
   // Redirect them to login if they dont have token AND are requesting a protected route
   if (!token && pathname !== "/login") {
     return NextResponse.redirect("login");
